@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 const FINNHUB_URL = "https://finnhub.io/api/v1/quote";
-const SYMBOL = "MSFT"; // Michelin an der Euronext Paris
+const SYMBOL = "ML.PA"; // Michelin an der Euronext Paris
 
 export async function GET() {
   const apiKey = process.env.FINNHUB_API_KEY;
