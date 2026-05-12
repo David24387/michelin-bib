@@ -80,7 +80,7 @@ export default function MichelinStockWidget() {
         overflow: "hidden",
         background: "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
         color: "white",
-        borderRadius: 24,
+        borderRadius: 16,
         padding: "16px 24px",
         boxSizing: "border-box",
         boxShadow: "none",
