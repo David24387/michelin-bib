@@ -75,7 +75,7 @@ export default function MichelinStockWidget() {
       className={montserrat.className}
       style={{
         width: "100%",
-        height: 180,
+        height: 220,
         maxWidth: "100%",
         overflow: "hidden",
         background: "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
@@ -212,7 +212,7 @@ export default function MichelinStockWidget() {
 
           <p
             style={{
-              margin: "8px 0 0",
+              margin: "14px 0 0",
               opacity: 0.68,
               fontSize: 10,
             }}
