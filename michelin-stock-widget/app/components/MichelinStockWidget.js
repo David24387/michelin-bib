@@ -75,7 +75,7 @@ export default function MichelinStockWidget() {
       className={montserrat.className}
       style={{
         width: "100%",
-        height: 205,
+        height: 240,
         maxWidth: "100%",
         overflow: "hidden",
         background: "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
