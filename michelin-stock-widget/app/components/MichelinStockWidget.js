@@ -21,9 +21,7 @@ function formatPrice(value) {
 function formatPercent(value) {
   if (typeof value !== "number") return "–";
 
-  return `${value > 0 ? "+" : ""}${value
-    .toFixed(2)
-    .replace(".", ",")} %`;
+  return `${value > 0 ? "+" : ""}${value.toFixed(2).replace(".", ",")} %`;
 }
 
 function formatTime(value) {
@@ -32,7 +30,6 @@ function formatTime(value) {
   return new Intl.DateTimeFormat("de-DE", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
   }).format(new Date(value));
 }
 
@@ -78,30 +75,31 @@ export default function MichelinStockWidget() {
       className={montserrat.className}
       style={{
         width: "100%",
-        maxWidth: 420,
-        background:
-          "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
+        height: 250,
+        maxWidth: "100%",
+        overflow: "hidden",
+        background: "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
         color: "white",
-        borderRadius: 28,
-        padding: 24,
-        boxShadow: "0 18px 45px rgba(0,0,0,0.18)",
+        borderRadius: 18,
+        padding: 22,
         boxSizing: "border-box",
+        boxShadow: "0 10px 24px rgba(0,0,0,0.14)",
       }}
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          gap: 16,
+          gap: 14,
         }}
       >
         <div>
           <p
             style={{
               margin: 0,
-              opacity: 0.8,
-              fontSize: 14,
-              fontWeight: 500,
+              opacity: 0.78,
+              fontSize: 12,
+              fontWeight: 600,
             }}
           >
             Aktienkurs
@@ -109,10 +107,10 @@ export default function MichelinStockWidget() {
 
           <h2
             style={{
-              margin: "6px 0 0",
-              fontSize: 36,
-              lineHeight: 1.1,
-              fontWeight: 700,
+              margin: "4px 0 0",
+              fontSize: 30,
+              lineHeight: 1,
+              fontWeight: 800,
             }}
           >
             Michelin
@@ -120,9 +118,9 @@ export default function MichelinStockWidget() {
 
           <p
             style={{
-              margin: "6px 0 0",
+              margin: "7px 0 0",
               opacity: 0.75,
-              fontSize: 14,
+              fontSize: 12,
             }}
           >
             Symbol: ML.PA
@@ -133,25 +131,25 @@ export default function MichelinStockWidget() {
           onClick={loadStock}
           aria-label="Aktualisieren"
           style={{
-            height: 48,
-            width: 48,
-            borderRadius: 16,
-            border: "1px solid rgba(255,255,255,0.25)",
+            height: 40,
+            width: 40,
+            minWidth: 40,
+            borderRadius: 14,
+            border: "1px solid rgba(255,255,255,0.35)",
             background: "rgba(255,255,255,0.12)",
             color: "white",
             cursor: "pointer",
-            transition: "0.2s ease",
           }}
         >
-          <RefreshCw size={18} />
+          <RefreshCw size={17} />
         </button>
       </div>
 
       {loading && (
         <p
           style={{
-            marginTop: 28,
-            fontSize: 18,
+            marginTop: 24,
+            fontSize: 15,
           }}
         >
           Lädt Kursdaten …
@@ -161,11 +159,11 @@ export default function MichelinStockWidget() {
       {error && (
         <p
           style={{
-            marginTop: 28,
+            marginTop: 22,
             background: "rgba(255,255,255,0.12)",
-            padding: 14,
-            borderRadius: 14,
-            fontSize: 14,
+            padding: 12,
+            borderRadius: 12,
+            fontSize: 13,
           }}
         >
           {error}
@@ -174,12 +172,12 @@ export default function MichelinStockWidget() {
 
       {stock && !error && (
         <>
-          <div style={{ marginTop: 28 }}>
+          <div style={{ marginTop: 22 }}>
             <div
               style={{
-                fontSize: 54,
+                fontSize: 46,
                 fontWeight: 800,
-                letterSpacing: "-2px",
+                letterSpacing: "-1.5px",
                 lineHeight: 1,
               }}
             >
@@ -190,23 +188,19 @@ export default function MichelinStockWidget() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: 8,
-                marginTop: 14,
-                padding: "10px 14px",
+                gap: 6,
+                marginTop: 10,
+                padding: "7px 11px",
                 borderRadius: 999,
                 background: isPositive
-                  ? "rgba(22, 163, 74, 0.25)"
-                  : "rgba(220, 38, 38, 0.25)",
+                  ? "rgba(22, 163, 74, 0.28)"
+                  : "rgba(220, 38, 38, 0.28)",
                 color: "white",
                 fontWeight: 700,
-                fontSize: 14,
+                fontSize: 12,
               }}
             >
-              {isPositive ? (
-                <TrendingUp size={18} />
-              ) : (
-                <TrendingDown size={18} />
-              )}
+              {isPositive ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
 
               <span>
                 {stock.change > 0 ? "+" : ""}
@@ -219,41 +213,25 @@ export default function MichelinStockWidget() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 14,
-              marginTop: 28,
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 8,
+              marginTop: 18,
             }}
           >
-            <SmallStat
-              label="Tageshoch"
-              value={formatPrice(stock.high)}
-            />
-
-            <SmallStat
-              label="Tagestief"
-              value={formatPrice(stock.low)}
-            />
-
-            <SmallStat
-              label="Eröffnung"
-              value={formatPrice(stock.open)}
-            />
-
-            <SmallStat
-              label="Vortag"
-              value={formatPrice(stock.previousClose)}
-            />
+            <SmallStat label="Hoch" value={formatPrice(stock.high)} />
+            <SmallStat label="Tief" value={formatPrice(stock.low)} />
+            <SmallStat label="Start" value={formatPrice(stock.open)} />
+            <SmallStat label="Vortag" value={formatPrice(stock.previousClose)} />
           </div>
 
           <p
             style={{
-              margin: "22px 0 0",
-              opacity: 0.7,
-              fontSize: 12,
+              margin: "10px 0 0",
+              opacity: 0.68,
+              fontSize: 10,
             }}
           >
-            Zuletzt aktualisiert:{" "}
-            {formatTime(stock.updatedAt)}
+            Stand: {formatTime(stock.updatedAt)}
           </p>
         </>
       )}
@@ -266,17 +244,18 @@ function SmallStat({ label, value }) {
     <div
       style={{
         background: "rgba(255,255,255,0.12)",
-        border: "1px solid rgba(255,255,255,0.12)",
-        borderRadius: 18,
-        padding: 14,
-        backdropFilter: "blur(4px)",
+        border: "1px solid rgba(255,255,255,0.13)",
+        borderRadius: 12,
+        padding: "8px 8px",
+        minWidth: 0,
       }}
     >
       <div
         style={{
-          fontSize: 12,
-          opacity: 0.75,
-          marginBottom: 4,
+          fontSize: 9,
+          opacity: 0.72,
+          marginBottom: 3,
+          whiteSpace: "nowrap",
         }}
       >
         {label}
@@ -284,8 +263,9 @@ function SmallStat({ label, value }) {
 
       <div
         style={{
-          fontWeight: 700,
-          fontSize: 16,
+          fontWeight: 800,
+          fontSize: 11,
+          whiteSpace: "nowrap",
         }}
       >
         {value}
