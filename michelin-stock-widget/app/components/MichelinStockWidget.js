@@ -75,13 +75,13 @@ export default function MichelinStockWidget() {
       className={montserrat.className}
       style={{
         width: "100%",
-        height: 250,
+        height: 210,
         maxWidth: "100%",
         overflow: "hidden",
         background: "linear-gradient(90deg, #144c9f 0%, #0c7ac5 100%)",
         color: "white",
-        borderRadius: 18,
-        padding: 22,
+        borderRadius: 0,
+        padding: "18px 22px",
         boxSizing: "border-box",
         boxShadow: "0 10px 24px rgba(0,0,0,0.14)",
       }}
@@ -175,7 +175,7 @@ export default function MichelinStockWidget() {
           <div style={{ marginTop: 22 }}>
             <div
               style={{
-                fontSize: 46,
+                fontSize: 40,
                 fontWeight: 800,
                 letterSpacing: "-1.5px",
                 lineHeight: 1,
@@ -208,20 +208,6 @@ export default function MichelinStockWidget() {
                 {formatPercent(stock.changePercent)}
               </span>
             </div>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 8,
-              marginTop: 18,
-            }}
-          >
-            <SmallStat label="Hoch" value={formatPrice(stock.high)} />
-            <SmallStat label="Tief" value={formatPrice(stock.low)} />
-            <SmallStat label="Start" value={formatPrice(stock.open)} />
-            <SmallStat label="Vortag" value={formatPrice(stock.previousClose)} />
           </div>
 
           <p
